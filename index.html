@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tic Tac Toe — Human vs RL Bot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" role="application">
+
+    <!-- Background SVG -->
+    <svg class="bg-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bggrad" x1="0" x2="1">
+          <stop offset="0" stop-color="#dbeafe"/>
+          <stop offset="1" stop-color="#eef2ff"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="600" fill="url(#bggrad)"/>
+      <g transform="translate(90,160) scale(1.2)">
+        <path d="M120 260 C80 240 60 200 80 170 C110 125 170 120 220 140 C260 155 300 180 320 200" 
+              fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+        <circle cx="130" cy="200" r="8" fill="#0f172a" opacity="0.7"/>
+      </g>
+      <g transform="translate(660,160) scale(1.1)">
+        <rect x="0" y="140" width="240" height="48" rx="10" fill="#0f172a" opacity="0.12"/>
+        <path d="M0 200 C40 170 80 150 120 150 C160 150 210 170 260 200" 
+              fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="90" cy="160" r="6" fill="#0f172a" opacity="0.6" />
+      </g>
+    </svg>
+
+    <div class="content">
+      <main>
+        <h1>Tic Tac Toe — Human vs RL Bot</h1>
+        <p class="lead">Play X (you) vs O (bot). The bot is trained with Q-learning in your browser. Choose a mode, optionally train, then play.</p>
+
+        <div id="board" class="board" aria-label="tic tac toe board"></div>
+
+        <div class="controls">
+          <button id="resetBtn">Reset</button>
+          <select id="modeSel">
+            <option value="easy">Easy (random)</option>
+            <option value="medium">Medium (RL with exploration)</option>
+            <option value="hard">Hard (trained RL, greedy)</option>
+          </select>
+          <button id="trainBtn" class="primary">Train</button>
+          <button id="saveBtn">Save Q</button>
+          <button id="clearBtn">Clear Q</button>
+        </div>
+
+        <div class="log">
+          <div>Status: <strong id="status">Your turn (you are X)</strong></div>
+          <div class="small">Training log: <span id="tlog">idle</span></div>
+        </div>
+      </main>
+
+      <aside class="panel">
+        <h3>Trainer & Info</h3>
+        <div class="muted">Q-table stored in localStorage under key <code>tictactoe_q</code>. Training runs in small batches.</div>
+        <div style="margin-top:10px">Q-entries: <strong id="qcount">0</strong></div>
+        <div class="small" style="margin-top:10px">
+          Tips:
+          <ul>
+            <li>Train Hard for many episodes to strengthen policy.</li>
+            <li>Easy = random; Medium = some randomness; Hard = greedy.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <footer>All training happens locally in your browser.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
